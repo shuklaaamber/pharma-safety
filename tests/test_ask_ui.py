@@ -12,7 +12,7 @@ def _run(tmp_path, monkeypatch, query):
     at = AppTest.from_file(APP).run(timeout=30)
     ask = [t for t in at.text_input if t.label.startswith("Ask about")][0]
     ask.set_value(query)
-    at.button(key="btn_ask").click().run()
+    at.button(key="btn_ask").click().run(timeout=30)
     return at
 
 

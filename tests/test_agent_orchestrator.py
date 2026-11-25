@@ -135,6 +135,6 @@ def test_ui_chat_flow(tmp_path, monkeypatch):
     at = AppTest.from_file(APP).run(timeout=30)
     box = [t for t in at.text_input if t.label.startswith("Ask about")][0]
     box.set_value("did the drug cause the rash?")
-    at.button(key="btn_ask").click().run()
+    at.button(key="btn_ask").click().run(timeout=30)
     assert not at.exception and any("can't help" in m.value.replace(chr(92), "") for m in at.markdown)
     assert any("out_of_scope" in c.value for c in at.caption)

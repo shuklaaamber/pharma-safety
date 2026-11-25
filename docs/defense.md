@@ -60,6 +60,6 @@ These come from the review (`docs/review-evidence.md`) and are accepted for a lo
 | **Polite status requests are read-only.** "Can you move REF-… to In Review?" does nothing. | Usability. | Deliberate: only imperative commands change status; rephrase to act. |
 | **`data/intake.db` holds one `LLM_CALL` row from a manual live check.** | Cosmetic. | The audit log is append-only by design; the file is gitignored. |
 | **External LLM call is a documented exception** to "no external APIs". | Query text and retrieved excerpts leave the machine when enabled. | Opt-in, PII-scanned, minimal, audited as metadata, extractive fallback. |
-| **One test was flaky once.** `test_ask_sop_question_is_extractive_when_toggle_off` timed out on a cold first run (Streamlit AppTest 3 s default); not reproduced since. | Possible slow-machine flake. | Cause not confirmed. Raising the AppTest timeout would likely fix it. |
+| **One test was flaky once** (since fixed). `test_ask_sop_question_is_extractive_when_toggle_off` timed out on a cold first run because the Ask-tab click builds the RAG index within Streamlit AppTest's 3 s default. | Slow-machine flake. | Click-triggered runs in the two Ask tests now use `timeout=30`; the full suite passed 4 consecutive runs afterward. |
 
 Not verified: commit contents (the folder is not a git repo), live OpenRouter response shapes, browser rendering, and the optional sentence-transformers/CrossEncoder drop-ins.
